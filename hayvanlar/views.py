@@ -39,6 +39,7 @@ def hayvanlar(request):
             return render(request,"animals.html",context)
     context={"hayvanlar":hayvanlar,"form":form}
     return render(request,"animals.html",context)
+
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
 def hayvan_delete(request,id):
     animals = get_object_or_404(Hayvan,id = id)
@@ -119,19 +120,20 @@ def sahipler_delete(request,id):
     messages.success(request,"Kayıt Başarıyla Silindi")
     return redirect("hayvanlar:hayvanSahipleri")
 
-
+@login_required(login_url = "user:sign_in")
 def sahip_detay(request,id):
     form = get_object_or_404(HayvanSahibi,id = id)
     hayvan = form.hayvan_set.all()
     context={"form":form,"hayvan":hayvan}
     return render(request,"sahip_detay.html",context)
 
+@login_required(login_url = "user:sign_in")
 def hayvan_detay(request,id):
     form = get_object_or_404(Hayvan,id = id)
     context={"form":form}
     return render(request,"hayvan_detay.html",context)
 
-
+@login_required(login_url = "user:sign_in")
 def alertmessage(request):
 	messages.warning(request,'Bu İşlemi Yapmaya Yetkiniz Yok')
 	return redirect("hayvanlar:animals")
