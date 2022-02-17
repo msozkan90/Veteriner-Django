@@ -19,10 +19,23 @@
     .control-label{
         font-weight: bold;
     }
+    .sahip-form {
+        border: none;
+        padding: 15px;
+        border-radius: 9px;
+        background-color: #a9aabc;
+      }
+      tbody {
+        background-color: #a9aabc;
+      }
+      table a {
+        font-weight: bold;
+        color: rgb(119, 117, 6);
+      }
 </style>
 {% endblock  %}
 {% block body %}
-<div class="container">
+<div class="container mt-5">
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -31,7 +44,6 @@
       <th scope="col">Soyisim</th>
       <th scope="col">E-mail</th>
       <th scope="col">Telefon</th>
-      <th scope="col">Hayvan</th>
       <th scope="col">Adres</th>
       <th scope="col">Düzenle</th>
       <th scope="col">Sil</th>
@@ -42,14 +54,15 @@
       {% for sahip  in sahipler %}
     <tr>
       <th scope="row">{{sahip.id}}</th>
-      <td>{{sahip.name}}</td>
+      <td>
+        <a href="{%url 'hayvanlar:sahipDetay' sahip.id %}">{{sahip.name}}</a>
+      </td>
       <td>{{sahip.surname}}</td>
       <td>{{sahip.email}}</td>
       <td>{{sahip.phone}}</td>
-      <td>{{sahip.owner}}</td>
       <td>{{sahip.address}}</td>
-      <td><a href="{%url 'hayvanlar:sahip-update' sahip.id %}"> <button class="btn btn-info">Düzenle</button></a></td>
-      <td><a href="{%url 'hayvanlar:sahipler_delete' sahip.id %}"> <button class="btn btn-info">Sil</button></a></td>
+      <td><a href="{%url 'hayvanlar:sahip-update' sahip.id %}"> <button class="btn btn-warning">Düzenle</button></a></td>
+      <td><a href="{%url 'hayvanlar:sahipler_delete' sahip.id %}"> <button class="btn btn-danger">Sil</button></a></td>
     </tr>
     {% endfor %}
   </tbody>

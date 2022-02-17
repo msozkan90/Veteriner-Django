@@ -14,11 +14,11 @@ def register(request):
 			if form.is_valid:
 				user = form.save(commit=False)
 				user.save()
-				messages.success(request,"Başarılı Bir Şekilde Kayıt Oldunuz")
+				messages.success(request,"Başarılı Bir Şekilde Kayıt Oldunuz. Lütfen Giriş Yapınız.")
 				return redirect("user:sign_in")
 		except(ValueError):
 			messages.warning(request,"Lütfen Formu Kriterlere Uygun Doldurunuz.")
-			return redirect("hayvanlar:animals")
+			return redirect("user:register")
 	return render(request,"register.html",{"form":form})
 
 
@@ -34,7 +34,7 @@ def sign_in(request):
 		if user is not None:
 			login(request, user)
 			messages.success(request, 'Oturum Açma İşlemi Başarılı')
-			return redirect('hayvanlar:animals')
+			return redirect('hayvanlar:index')
 		else:
 			messages.info(request, 'Kullanıcı adı  veya şifre hatalı ')
 
@@ -47,4 +47,4 @@ def sign_in(request):
 def sign_out(request):
 	logout(request)
 	messages.success(request, "Oturum Başarılı Bir Şekilde Kapatıldı")
-	return redirect("hayvanlar:animals")
+	return redirect("hayvanlar:index")

@@ -5,8 +5,8 @@ from . import views
 app_name="hayvanlar"
 
 urlpatterns = [
-    
-    path('', views.hayvanlar, name="animals"),
+    path('', views.index, name="index"),
+    path('hayvanlar/', views.hayvanlar, name="animals"),
     path('hayvanSahipleri/', views.sahipler, name="hayvanSahipleri"),
     path('hayvan-delete/<int:id>',views.hayvan_delete,name = "hayvan_delete"),
     path('sahip-delete/<int:id>',views.sahipler_delete,name = "sahipler_delete"),

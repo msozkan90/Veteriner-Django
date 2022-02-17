@@ -6,10 +6,13 @@ from django.contrib import messages
 from .models import *
 from django.db.models import Q
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import login_required
 
 
-default_message="Bu İşlemi Gerçekleştirmek İçin Yetkiniz Yok"
+def index(request):
+    return render(request,"index.html")
 
+@login_required(login_url = "user:sign_in")
 def hayvanlar(request):
     query=request.GET.get('search')
     hayvanlar=Hayvan.objects.all()
@@ -24,7 +27,7 @@ def hayvanlar(request):
                 return redirect("hayvanlar:animals")
         except(ValueError):
                 messages.warning(request,"Lütfen Formu Uygun Bir Şekilde Doldurun.")
-                return redirect("hayvanlar:animals")
+                return redirect("hayvanlar:index")
     if query:
         hayvanlar=Hayvan.objects.filter(Q(type__icontains=query) | Q(genus__icontains=query) | Q(name__icontains=query) )
         if hayvanlar: 
@@ -58,10 +61,12 @@ def hayvan_update(request,id):
     context={"hayvanlar":hayvanlar,"form":form}
     return render(request,"edit_animals.html",context)
 
-
+@login_required(login_url = "user:sign_in")
 def sahipler(request):
+
     sahipler=HayvanSahibi.objects.all()
-    form=SahipForm()
+    # hayvan = sahipler.hayvan_set.all()
+    form2=SahipForm()
 
     query=request.GET.get('search')
     if request.method == 'POST':
@@ -74,18 +79,18 @@ def sahipler(request):
                 return redirect("hayvanlar:hayvanSahipleri")
         except(ValueError):
             messages.warning(request,"Lütfen Formu Uygun Bir Şekilde Doldurun.")
-            return redirect("hayvanlar:hayvanSahipleri")
+            return redirect("hayvanlar:index")
 
     if query:
         sahipler=HayvanSahibi.objects.filter(Q(name__icontains=query) | Q(surname__icontains=query))
         if sahipler:
-            context={"sahipler":sahipler,"form":form}
+            context={"sahipler":sahipler,"form2":form2}
             return render(request,"hayvanSahipleri.html",context)
         else:
             messages.warning(request,"Aradığınız Kriterlerde Kayıt Bulunamadı.")
-            context={"sahipler":sahipler,"form":form}
+            context={"sahipler":sahipler,"form2":form2}
             return render(request,"hayvanSahipleri.html",context)
-    context={"sahipler":sahipler,"form":form}
+    context={"sahipler":sahipler,"form2":form2}
     return render(request,"hayvanSahipleri.html",context)
 
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")

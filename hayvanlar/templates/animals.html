@@ -1,136 +1,138 @@
-{% extends 'layout.html' %}
-{% block style %}
+{% extends 'layout.html' %} {% block style %}
 <style>
-    .form-group input {
-        width: 100%!important;
-    }
-    .form-group textarea{
-        width: 100%!important;
-    }
-    .form-group select{
-        width: 100%!important;
-    }
-    .hayvan-form{
-        border: 2px black solid;
-        padding: 15px;
-        border-radius: 9px;
-        background-color: bisque;
-    }
-    .control-label{
-        font-weight: bold;
-    }
+  .form-group input {
+    width: 100%;
+  }
+  .form-group textarea {
+    width: 100%;
+  }
+  .form-group select {
+    width: 100%;
+  }
+  .hayvan-form {
+    border: none;
+    padding: 15px;
+    border-radius: 9px;
+    background-color: #a9aabc;
+  }
+  .control-label {
+    font-weight: bold;
+  }
+  tbody {
+    background-color: #a9aabc;
+  }
+  table a {
+    font-weight: bold;
+    color: rgb(119, 117, 6);
+  }
 </style>
-{% endblock  %}
-{% block body %}
-<div class="container">
-    <form action="{% url 'hayvanlar:animals' %}" class="form-inline" method="get">
-        <div class="form-group mx-sm-3 mb-2 w-50 " >
-        <label for="" class="sr-only">search</label>
-        <input name="search" type="" class="form-control" id="" placeholder="Ara...">
-        </div>
-      <button type="submit" class="btn btn-info btn-md mb-2">Ara</button>
-    </form>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tür</th>
-      <th scope="col">Cins</th>
-      <th scope="col">İsim</th>
-      <th scope="col">Yaş</th>
-      <th scope="col">Sahibi</th>
-      <th scope="col">Düzenle</th>
-      <th scope="col">Sil</th>
+{% endblock %} {% block body %}
+<div class="container mt-5">
+  <form action="{% url 'hayvanlar:animals' %}" class="form-inline" method="get">
+    <div class="form-group mx-sm-3 mb-2 w-50">
+      <label for="" class="sr-only">search</label>
+      <input
+        name="search"
+        type=""
+        class="form-control w-100"
+        id=""
+        placeholder="Ara..."
+      />
+    </div>
+    <button type="submit" class="btn btn-info btn-md mb-2">Ara</button>
+  </form>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tür</th>
+        <th scope="col">Cins</th>
+        <th scope="col">İsim</th>
+        <th scope="col">Yaş</th>
+        <th scope="col">Sahibi</th>
+        <th scope="col">Düzenle</th>
+        <th scope="col">Sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for hayvan in hayvanlar %}
+      <tr>
+        <th scope="row">{{hayvan.id}}</th>
+        <td>{{hayvan.type}}</td>
+        <td>{{hayvan.genus}}</td>
+        <td><a href="{%url 'hayvanlar:hayvanDetay' hayvan.id %}">{{hayvan.name}}</a></td>  
+        <td>{{hayvan.age}}</td>
+        <td>{{hayvan.owner}}</td>
+        <td>
+          <a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}">
+            <button class="btn btn-warning">Düzenle</button></a
+          >
+        </td>
+        <td>
+          <a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}">
+            <button class="btn btn-danger">Sil</button></a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    </tr>
-  </thead>
-  <tbody>
-      {% for hayvan  in hayvanlar %}
-    <tr>
-      <th scope="row">{{hayvan.id}}</th>
-      <td>{{hayvan.type}}</td>
-      <td>{{hayvan.genus}}</td>
-      <td>{{hayvan.name}}</td>
-      <td>{{hayvan.age}}</td>
-      <td>{{hayvan.owner}}</td>
-      <td><a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}""> <button class="btn btn-info">Düzenle</button></a></td>
-      <td><a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}"> <button class="btn btn-info">Sil</button></a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <hr />
 
-<hr>
-
-<br>
-<form class="hayvan-form" action="{%url 'hayvanlar:animals' %}" method="post" id="form-control"> 
+  <br />
+  <form
+    class="hayvan-form"
+    action="{%url 'hayvanlar:animals' %}"
+    method="post"
+    id="form-control"
+  >
     {% csrf_token %}
-    <div> <h3><strong>Hayvan  Ekle</strong> </h3></div> 
-    
-    <div class="form-group label-floating is-empty">
-        <label  class="control-label"> Hayvanın Türü</label><br>
-        <div class="form-group label-floating is-empty">{{form.type}}</div> 
-        <span class="material-input"></span>
+    <div>
+      <h3><strong>Hayvan Ekle</strong></h3>
     </div>
-    <br>
-    
+
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Cinsi</label><br>
-        <div class="form-group label-floating is-empty">{{form.genus}}</div>
-        <span class="material-input"></span>
+      <label class="control-label"> Hayvanın Türü</label><br />
+      <div class="form-group label-floating is-empty">{{form.type}}</div>
     </div>
-    <br>
-    
+    <br />
+
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın İsmi</label><br>
-        <div class="form-group label-floating is-empty">{{form.name}}</div> 
-        <span class="material-input"></span>
+      <label class="control-label">Hayvanın Cinsi</label><br />
+      <div class="form-group label-floating is-empty">{{form.genus}}</div>
     </div>
-    <br>
-    
+    <br />
+
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Yaşı</label><br>
-        <div class="form-group label-floating is-empty " id="price">{{form.age}}</div>
-        <span class="material-input"></span>
+      <label class="control-label">Hayvanın İsmi</label><br />
+      <div class="form-group label-floating is-empty">{{form.name}}</div>
     </div>
-    <br>
-    
+    <br />
+
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Sahibi</label><br>
-        <div class="form-group label-floating is-empty">{{form.owner}}</div>
-        <span class="material-input"></span>
+      <label class="control-label">Hayvanın Yaşı</label><br />
+      <div class="form-group label-floating is-empty" id="price">
+        {{form.age}}
+      </div>
     </div>
-    <br>
-    
+    <br />
+
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvan Hakkında </label>
-        <div class="form-group label-floating is-empty">{{form.description}}</div>
-        <span class="material-input"></span>
+      <label class="control-label">Hayvanın Sahibi</label><br />
+      <div class="form-group label-floating is-empty">{{form.owner}}</div>
     </div>
-    <br>
+    <br />
+
+    <div class="form-group label-floating is-empty">
+      <label class="control-label">Hayvan Hakkında </label>
+      <div class="form-group label-floating is-empty">{{form.description}}</div>
+    </div>
+    <br />
     <div class="form-group">
-        <button type="submit" class="btn btn-info">HAYVAN EKLE</button>
+      <button type="submit" class="btn btn-info">HAYVAN EKLE</button>
     </div>
-    </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </form>
 </div>
 
-
-
-
-{% endblock  %}
+{% endblock %} {% block script %} {% endblock %}

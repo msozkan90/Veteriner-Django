@@ -19,11 +19,25 @@
     .control-label{
         font-weight: bold;
     }
+    .hayvan-form {
+        border: none;
+        padding: 15px;
+        border-radius: 9px;
+        background-color: #a9aabc;
+      }
+
+      tbody {
+        background-color: #a9aabc;
+      }
+      table a {
+        font-weight: bold;
+        color: rgb(119, 117, 6);
+      }
 </style>
 {% endblock  %}
 {% block body %}
 <div class="container">
-<table class="table">
+<table class="table  mt-5">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
@@ -43,11 +57,11 @@
       <th scope="row">{{hayvan.id}}</th>
       <td>{{hayvan.type}}</td>
       <td>{{hayvan.genus}}</td>
-      <td>{{hayvan.name}}</td>
+      <td><a href="{%url 'hayvanlar:hayvanDetay' hayvan.id %}">{{hayvan.name}}</a></td> 
       <td>{{hayvan.age}}</td>
       <td>{{hayvan.owner}}</td>
-      <td><a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}"> <button class="btn btn-info">Düzenle</button></a></td>
-      <td><a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}"> <button class="btn btn-info">Sil</button></a></td>
+      <td><a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}"> <button class="btn btn-warning">Düzenle</button></a></td>
+      <td><a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}"> <button class="btn btn-danger">Sil</button></a></td>
     </tr>
     {% endfor %}
   </tbody>

@@ -1,0 +1,59 @@
+{% extends 'layout.html' %} {% block style %} {% load static %}
+<style>
+  body {
+    background-image: url('{% static "images/homepage_bg.jpg" %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 60px);
+    overflow-x: hidden;
+  }
+  .welcome-card {
+    background: rgba(14, 14, 14, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: none;
+  }
+</style>
+{% endblock %} {% block body %}
+
+<div class="container-fluid vet-container px-0">
+  <div class="row pt-5">
+    <div class="col-md-4 mx-auto pt-5 mt-5">
+      <div class="card welcome-card py-5">
+        <div class="card-body">
+          <div class="welcome-title text-center pb-5">
+            <h1 class="text-white">
+              <span style="color: #00c040">MyVet</span> 'e Hoşgeldiniz.
+            </h1>
+          </div>
+          {% if user.is_authenticated %}
+          <div class="d-flex flex-row justify-content-between align-center">
+            <a href="{% url 'hayvanlar:hayvanSahipleri'%}" class="btn btn-info">
+              Hayvan Sahibi Ekle</a
+            >
+            <a href="{% url 'hayvanlar:animals'%}" class="btn btn-danger"
+              >Hayvan Ekle</a
+            >
+          </div>
+          {% else %}
+          <div class="d-flex flex-row justify-content-between align-center">
+            <a href="{% url 'user:sign_in'%}" class="btn btn-info">
+              Giriş yap</a
+            >
+            <a href="{% url 'user:register'%}" class="btn btn-danger"
+              >Kayıt Ol</a
+            >
+          </div>
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block script %} {% endblock %}
