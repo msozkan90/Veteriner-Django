@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block style %}
+<style>
+
+</style>
+{% endblock  %}
+{% block body %}
+<div class="container">
+
+    <div> <h4><strong>Hayvan Sahibi </strong> </h4></div> 
+    <hr>
+    <div class="form-group label-floating is-empty">
+        <h5><strong>  <label  class="control-label">  İsim</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.name}}</div> 
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>  <label class="control-label"> Soyisim</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.surname}}</div>
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label"> Email</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.email}}</div> 
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label"> Telefon</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty " id="price">{{form.phone}}</div>
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label"> Adres</label> </strong> </h5>  <hr>
+
+        <div class="form-group label-floating is-empty">{{form.address}}</div>
+       
+    </div>
+    <br>
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label">Hayvanları</label> </strong> </h5>  <hr>
+        {% for animal  in hayvan %}
+        <div class="form-group label-floating is-empty">{{animal}}</div> 
+        {% endfor %}
+    </div>
+    <br>
+
+   
+
+
+
+
+
+
+ 
+    
+
+
+
+</div>
+
+
+
+{% endblock  %}

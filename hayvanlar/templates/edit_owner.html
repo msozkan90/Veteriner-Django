@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% block style %}
+<style>
+    .form-group input {
+        width: 100%!important;
+    }
+    .form-group textarea{
+        width: 100%!important;
+    }
+    .form-group select{
+        width: 100%!important;
+    }
+    .sahip-form{
+        border: 2px black solid;
+        padding: 15px;
+        border-radius: 9px;
+        background-color: bisque;
+    }
+    .control-label{
+        font-weight: bold;
+    }
+</style>
+{% endblock  %}
+{% block body %}
+<div class="container">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Telefon</th>
+      <th scope="col">Hayvan</th>
+      <th scope="col">Adres</th>
+      <th scope="col">Düzenle</th>
+      <th scope="col">Sil</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      {% for sahip  in sahipler %}
+    <tr>
+      <th scope="row">{{sahip.id}}</th>
+      <td>{{sahip.name}}</td>
+      <td>{{sahip.surname}}</td>
+      <td>{{sahip.email}}</td>
+      <td>{{sahip.phone}}</td>
+      <td>{{sahip.owner}}</td>
+      <td>{{sahip.address}}</td>
+      <td><a href="{%url 'hayvanlar:sahip-update' sahip.id %}"> <button class="btn btn-info">Düzenle</button></a></td>
+      <td><a href="{%url 'hayvanlar:sahipler_delete' sahip.id %}"> <button class="btn btn-info">Sil</button></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<hr>
+
+
+<form class="sahip-form" action="" method="post" id="form-control"> 
+{% csrf_token %}
+<div> <h3><strong>Hayvan Sahibi Düzenle</strong> </h3></div> 
+
+<div class="form-group label-floating is-empty">
+    <label  class="control-label">İsim</label><br>
+    <div class="form-group label-floating is-empty">{{form.name}}</div> 
+    <span class="material-input"></span>
+</div>
+<br>
+
+<div class="form-group label-floating is-empty">
+    <label class="control-label">Soyisim</label><br>
+    <div class="form-group label-floating is-empty">{{form.surname}}</div>
+    <span class="material-input"></span>
+</div>
+<br>
+
+<div class="form-group label-floating is-empty">
+    <label class="control-label">Email</label><br>
+    <div class="form-group label-floating is-empty">{{form.email}}</div> 
+    <span class="material-input"></span>
+</div>
+<br>
+
+<div class="form-group label-floating is-empty">
+    <label class="control-label">Telefon</label><br>
+    <input type="text" name="phone" maxlength="11" required="" id="id_phone"  pattern="[0]{1}[5]{1}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" {{form.phone}}
+    <span class="material-input"></span>
+</div>
+<br>
+
+
+<div class="form-group label-floating is-empty">
+    <label class="control-label">Sahibin Adresi </label>
+    <div class="form-group label-floating is-empty">{{form.address}}</div>
+    <span class="material-input"></span>
+</div>
+<br>
+<div class="form-group">
+    <button type="submit" class="btn btn-info">HAYVAN SAHİBİ DÜZENLE</button>
+</div>
+</form>
+
+
+
+</div>
+
+
+
+
+{% endblock  %}

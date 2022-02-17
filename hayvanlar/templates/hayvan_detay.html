@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block style %}
+<style>
+
+</style>
+{% endblock  %}
+{% block body %}
+<div class="container">
+    <div> <h4><strong>Hayvan </strong> </h4></div> 
+    <hr>
+    <div class="form-group label-floating is-empty">
+        <h5><strong>  <label  class="control-label"> Hayvanın Türü</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.type}}</div> 
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>  <label class="control-label">Hayvanın Cinsi</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.genus}}</div>
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label">Hayvanın İsmi</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty">{{form.name}}</div> 
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label">Hayvanın Yaşı</label></strong> </h5><hr>
+        <div class="form-group label-floating is-empty " id="price">{{form.age}}</div>
+        
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label">Hayvanın Sahibi</label> </strong> </h5>  <hr>
+
+        <div class="form-group label-floating is-empty">{{form.owner}}</div>
+       
+    </div>
+    <br>
+    
+    <div class="form-group label-floating is-empty">
+        <h5><strong>   <label class="control-label">Hayvan Hakkında </label></strong> </h5>
+        <hr>
+        <div class="form-group label-floating is-empty">{{form.description}}</div>
+     
+    </div>
+    <br> 
+
+
+
+
+</div>
+
+
+
+{% endblock  %}
