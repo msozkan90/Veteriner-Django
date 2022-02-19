@@ -55,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for hayvan in hayvanlar %}
+      {% for hayvan in page_obj  %}
       <tr>
         <th scope="row">{{hayvan.id}}</th>
         <td>{{hayvan.type}}</td>
@@ -75,6 +75,23 @@
         </td>
       </tr>
       {% endfor %}
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; ilk</a>
+                <a href="?page={{ page_obj.previous_page_number }}">önceki</a>
+            {% endif %}
+    
+            <span class="current">
+                Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">sonraki</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">son &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
     </tbody>
   </table>
 

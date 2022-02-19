@@ -7,6 +7,7 @@ from .models import *
 from django.db.models import Q
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -16,6 +17,9 @@ def index(request):
 def hayvanlar(request):
     query=request.GET.get('search')
     hayvanlar=Hayvan.objects.all()
+    paginator = Paginator(hayvanlar, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     form=HayvanForm()
     if request.method == 'POST':
         form = HayvanForm(request.POST)
@@ -27,17 +31,17 @@ def hayvanlar(request):
                 return redirect("hayvanlar:animals")
         except(ValueError):
                 messages.warning(request,"Lütfen Formu Uygun Bir Şekilde Doldurun.")
-                return redirect("hayvanlar:index")
+                return redirect("hayvanlar:animals")
     if query:
         hayvanlar=Hayvan.objects.filter(Q(type__icontains=query) | Q(genus__icontains=query) | Q(name__icontains=query) )
         if hayvanlar: 
-            context={"hayvanlar":hayvanlar,"form":form}
+            context={"hayvanlar":hayvanlar,"form":form,"page_obj":page_obj}
             return render(request,"animals.html",context)
         else:
             messages.warning(request,"Aradığınız Kriterlerde Kayıt Bulunamadı.")
-            context={"hayvanlar":hayvanlar,"form":form}
+            context={"hayvanlar":hayvanlar,"form":form,"page_obj":page_obj}
             return render(request,"animals.html",context)
-    context={"hayvanlar":hayvanlar,"form":form}
+    context={"hayvanlar":hayvanlar,"form":form,"page_obj":page_obj}
     return render(request,"animals.html",context)
 
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
@@ -66,6 +70,9 @@ def hayvan_update(request,id):
 def sahipler(request):
 
     sahipler=HayvanSahibi.objects.all()
+    paginator = Paginator(sahipler, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     # hayvan = sahipler.hayvan_set.all()
     form2=SahipForm()
 
@@ -85,13 +92,13 @@ def sahipler(request):
     if query:
         sahipler=HayvanSahibi.objects.filter(Q(name__icontains=query) | Q(surname__icontains=query))
         if sahipler:
-            context={"sahipler":sahipler,"form2":form2}
+            context={"sahipler":sahipler,"form2":form2,"page_obj":page_obj}
             return render(request,"hayvanSahipleri.html",context)
         else:
             messages.warning(request,"Aradığınız Kriterlerde Kayıt Bulunamadı.")
-            context={"sahipler":sahipler,"form2":form2}
+            context={"sahipler":sahipler,"form2":form2,"page_obj":page_obj}
             return render(request,"hayvanSahipleri.html",context)
-    context={"sahipler":sahipler,"form2":form2}
+    context={"sahipler":sahipler,"form2":form2,"page_obj":page_obj}
     return render(request,"hayvanSahipleri.html",context)
 
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
