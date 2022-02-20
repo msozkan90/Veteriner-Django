@@ -17,7 +17,7 @@ def register(request):
 				messages.success(request,"Başarılı Bir Şekilde Kayıt Oldunuz. Lütfen Giriş Yapınız.")
 				return redirect("user:sign_in")
 		except(ValueError):
-			messages.warning(request,"Lütfen Formu Kriterlere Uygun Doldurunuz.")
+			messages.warning(request,"Lütfen formata uygun şekilde bilgileri doldurun.")
 			return redirect("user:register")
 	return render(request,"register.html",{"form":form})
 
@@ -36,11 +36,9 @@ def sign_in(request):
 			messages.success(request, 'Oturum Açma İşlemi Başarılı')
 			return redirect('hayvanlar:index')
 		else:
-			messages.info(request, 'Kullanıcı adı  veya şifre hatalı ')
-
-		context = {"form":form}
-	
-		return render(request, 'hayvanlar:animals', context)
+			messages.warning(request, 'Kullanıcı adı  veya şifre hatalı ')
+			context = {"form":form}
+			return redirect('user:sign_in')
 	context = {"form":form}
 	return render(request, 'login.html', context)
 

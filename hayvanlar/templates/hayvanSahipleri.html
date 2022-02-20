@@ -153,6 +153,8 @@
         required=""
         id="id_phone"
         pattern="[0]{1}[5]{1}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}"
+        oninvalid="this.setCustomValidity('Lütfen geçerli formatta bir telefon numarası giriniz. Örneğin: 05334442222')"
+        oninput="this.setCustomValidity('')"
       />
       <span class="material-input"></span>
     </div>
@@ -169,5 +171,11 @@
     </div>
   </form>
 </div>
+
+{% endblock %}
+{% block script %} 
+<script>
+
+</script>
 
 {% endblock %}

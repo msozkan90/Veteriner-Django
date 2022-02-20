@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <form class="hayvan-form" action="" method="post" id="form-control">
+      {% csrf_token %}
+      <div>
+        <h3><strong>KAYIT OL</strong></h3>
+      </div>
+      {% comment %} <div class="form-group label-floating is-empty">
+        <label class="control-label"> KULLANICI ADI</label><br />
+        <div class="form-group label-floating is-empty">{{form.username}}</div>
+        <span class="material-input"></span>
+      </div> {% endcomment %}
+      <div class="form-group label-floating is-empty" >
+                      
+                      
+        <label class="control-label required" for="id_username">Kullanıcı Adı:</label>
+        
+            <input type="text" name="username" class="vTextField" minlength="3" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+        
+    
+    
+        <div class="help">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+    
+  </div>
+      <br />
+      <div class="form-group label-floating is-empty">
+        <label class="control-label"> E-MAİL</label><br />
+        <div class="form-group label-floating is-empty">{{form.email}}</div>
+        <span class="material-input"></span>
+      </div>
+      <br />
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">ŞİFRE </label>
+        <div class="form-group label-floating is-empty">{{form.password1}}</div>
+        <span class="material-input"></span>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">ŞİFRE TEKRAR </label>
+        <div class="form-group label-floating is-empty">{{form.password2}}</div>
+        <span class="material-input"></span>
+      </div>
+      <br />
+      <div class="form-group">
+        <button type="submit" class="btn btn-info">KAYIT OL</button>
+      </div>
+    </form>
+  </div>
