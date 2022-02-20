@@ -46,3 +46,204 @@
       </div>
     </form>
   </div>
+
+
+
+  {% comment %} ------------------------------------------------------------------------------------------------ {% endcomment %}
+
+
+
+  <form
+  action="{% url 'hayvanlar:hayvanSahipleri' %}"
+  class="form-inline"
+  method="get"
+>
+  <div class="form-group mx-sm-3 mb-2 w-50">
+    <label for="" class="sr-only">search</label>
+    <input
+      name="search"
+      type=""
+      class="form-control"
+      id=""
+      placeholder="Ara..."
+    />
+  </div>
+  <button type="submit" class="btn btn-info btn-md mb-2">Ara</button>
+</form>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Telefon</th>
+      <th scope="col">Adres</th>
+      <th scope="col">Düzenle</th>
+      <th scope="col">Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sahip in page_obj %}
+    <tr>
+      <th scope="row">{{sahip.id}}</th>
+      <td>
+        <a href="{%url 'hayvanlar:sahipDetay' sahip.id %}">{{sahip.name}}</a>
+      </td>
+      <td>{{sahip.surname}}</td>
+      <td>{{sahip.email}}</td>
+      <td>{{sahip.phone}}</td>
+      <td>{{sahip.address}}</td>
+      <td>
+        <a href="{%url 'hayvanlar:sahip-update' sahip.id %}">
+          <button class="btn btn-warning">Düzenle</button></a
+        >
+      </td>
+      <td>
+        <a href="{%url 'hayvanlar:sahipler_delete' sahip.id %}">
+          <button class="btn btn-danger">Sil</button></a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; ilk</a>
+              <a href="?page={{ page_obj.previous_page_number }}">önceki</a>
+          {% endif %}
+  
+          <span class="current">
+              Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
+          </span>
+  
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">sonraki</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">son &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
+    <form action="{% url 'hayvanlar:animals' %}" class="form-inline" method="get">
+      <div class="form-group mx-sm-3 mb-2 w-50">
+        <label for="" class="sr-only">search</label>
+        <input
+          name="search"
+          type=""
+          class="form-control w-100"
+          id=""
+          placeholder="Ara..."
+        />
+      </div>
+      <button type="submit" class="btn btn-info btn-md mb-2">Ara</button>
+    </form>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tür</th>
+          <th scope="col">Cins</th>
+          <th scope="col">İsim</th>
+          <th scope="col">Yaş</th>
+          <th scope="col">Sahibi</th>
+          <th scope="col">Düzenle</th>
+          <th scope="col">Sil</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for hayvan in page_obj  %}
+        <tr>
+          <th scope="row">{{hayvan.id}}</th>
+          <td>{{hayvan.type}}</td>
+          <td>{{hayvan.genus}}</td>
+          <td><a href="{%url 'hayvanlar:hayvanDetay' hayvan.id %}">{{hayvan.name}}</a></td>  
+          <td>{{hayvan.age}}</td>
+          <td>{{hayvan.owner}}</td>
+          <td>
+            <a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}">
+              <button class="btn btn-warning">Düzenle</button></a
+            >
+          </td>
+          <td>
+            <a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}">
+              <button class="btn btn-danger">Sil</button></a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+  
+      </tbody>
+    </table>
+  
+    <hr />
+  
+    <br />
+    <form
+      class="hayvan-form"
+      action="{%url 'hayvanlar:animals' %}"
+      method="post"
+      id="form-control"
+    >
+      {% csrf_token %}
+      <div>
+        <h3><strong>Hayvan Ekle</strong></h3>
+      </div>
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label"> Hayvanın Türü</label><br />
+        <div class="form-group label-floating is-empty">{{form.type}}</div>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">Hayvanın Cinsi</label><br />
+        <div class="form-group label-floating is-empty">{{form.genus}}</div>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">Hayvanın İsmi</label><br />
+        <div class="form-group label-floating is-empty">{{form.name}}</div>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">Hayvanın Yaşı</label><br />
+        <div class="form-group label-floating is-empty" id="price">
+          {{form.age}}
+        </div>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">Hayvanın Sahibi</label><br />
+        <div class="form-group label-floating is-empty">{{form.owner}}</div>
+      </div>
+      <br />
+  
+      <div class="form-group label-floating is-empty">
+        <label class="control-label">Hayvan Hakkında </label>
+        <div class="form-group label-floating is-empty">{{form.description}}</div>
+      </div>
+      <br />
+      <div class="form-group">
+        <button type="submit" class="btn btn-info">HAYVAN EKLE</button>
+      </div>
+    </form>
+  </div>
+  

@@ -25,37 +25,51 @@
     font-weight: bold;
     color: rgb(119, 117, 6);
   }
+  .table_head{
+    background-color: #138496;
+    
+  }
+  #example_length{
+    color: white;
+  }
+  #example_filter{
+    color: white;
+  }
+  #example_info{
+    color: white;
+  }
+  .dataTables_wrapper .dataTables_filter input {
+
+    background-color: white;
+
+}
+.dataTables_wrapper .dataTables_length select {
+
+  background-color: white;
+
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+  color: rgb(255, 251, 251) !important;
+
+}
 </style>
 {% endblock %} {% block body %}
 <div class="container mt-5">
-  <form action="{% url 'hayvanlar:animals' %}" class="form-inline" method="get">
-    <div class="form-group mx-sm-3 mb-2 w-50">
-      <label for="" class="sr-only">search</label>
-      <input
-        name="search"
-        type=""
-        class="form-control w-100"
-        id=""
-        placeholder="Ara..."
-      />
-    </div>
-    <button type="submit" class="btn btn-info btn-md mb-2">Ara</button>
-  </form>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tür</th>
-        <th scope="col">Cins</th>
-        <th scope="col">İsim</th>
-        <th scope="col">Yaş</th>
-        <th scope="col">Sahibi</th>
-        <th scope="col">Düzenle</th>
-        <th scope="col">Sil</th>
-      </tr>
+  <table id="example" class="display" style="width:100%">
+    <thead class="table_head">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tür</th>
+          <th scope="col">Cins</th>
+          <th scope="col">İsim</th>
+          <th scope="col">Yaş</th>
+          <th scope="col">Sahibi</th>
+          <th scope="col">Düzenle</th>
+          <th scope="col">Sil</th>
+        </tr>
     </thead>
     <tbody>
-      {% for hayvan in page_obj  %}
+      {% for hayvan in hayvanlar %}
       <tr>
         <th scope="row">{{hayvan.id}}</th>
         <td>{{hayvan.type}}</td>
@@ -75,25 +89,8 @@
         </td>
       </tr>
       {% endfor %}
-      <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; ilk</a>
-                <a href="?page={{ page_obj.previous_page_number }}">önceki</a>
-            {% endif %}
-    
-            <span class="current">
-                Sayfa {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}.
-            </span>
-    
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">sonraki</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">son &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
     </tbody>
-  </table>
+</table>
 
   <hr />
 
@@ -152,4 +149,27 @@
   </form>
 </div>
 
-{% endblock %} {% block script %} {% endblock %}
+{% endblock %} 
+{% block script %} 
+
+<script>
+let previous = document.getElementById('example_previous')
+let next = document.getElementById('example_next')
+let table = new DataTable('#example', {
+    // options
+    "language": {
+            "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
+            "zeroRecords": "Herhangi bir kayıt bulunamadı",
+            "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
+            "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"Ara",
+          
+        }
+      
+
+});
+
+</script>
+
+{% endblock %}
