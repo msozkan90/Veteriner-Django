@@ -41,13 +41,13 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Tür</th>
-      <th scope="col">Cins</th>
-      <th scope="col">İsim</th>
-      <th scope="col">Yaş</th>
-      <th scope="col">Sahibi</th>
-      <th scope="col">Düzenle</th>
-      <th scope="col">Sil</th>
+      <th scope="col">Type</th>
+      <th scope="col">Genus</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
 
     </tr>
   </thead>
@@ -57,11 +57,11 @@
       <th scope="row">{{hayvan.id}}</th>
       <td>{{hayvan.type}}</td>
       <td>{{hayvan.genus}}</td>
-      <td><a href="{%url 'hayvanlar:hayvanDetay' hayvan.id %}">{{hayvan.name}}</a></td> 
+      <td><a href="{%url 'hayvanlar:animal_detail' hayvan.id %}">{{hayvan.name}}</a></td> 
       <td>{{hayvan.age}}</td>
       <td>{{hayvan.owner}}</td>
-      <td><a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}"> <button class="btn btn-warning">Düzenle</button></a></td>
-      <td><a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}"> <button class="btn btn-danger">Sil</button></a></td>
+      <td><a href="{% url 'hayvanlar:animal-update' hayvan.id%}"> <button class="btn btn-warning">Edit</button></a></td>
+      <td><a href="{% url 'hayvanlar:animal_delete' hayvan.id%}"> <button class="btn btn-danger">Delete</button></a></td>
     </tr>
     {% endfor %}
   </tbody>
@@ -110,50 +110,50 @@
 <form class="hayvan-form" action="" method="post" id="form-control">
 
     {% csrf_token %}
-    <div> <h3><strong>Hayvan  Düzenle</strong> </h3></div> 
+    <div> <h3><strong>Edit Animals</strong> </h3></div> 
     <div class="form-group label-floating is-empty">
-        <label  class="control-label"> Hayvanın Türü</label><br>
+        <label  class="control-label"> Type of animal</label><br>
         <div class="form-group label-floating is-empty">{{form.type}}</div> 
         <span class="material-input"></span>
     </div>
     <br>
     
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Cinsi</label><br>
+        <label class="control-label">Genus of animal</label><br>
         <div class="form-group label-floating is-empty">{{form.genus}}</div>
         <span class="material-input"></span>
     </div>
     <br>
     
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın İsmi</label><br>
+        <label class="control-label">Name</label><br>
         <div class="form-group label-floating is-empty">{{form.name}}</div> 
         <span class="material-input"></span>
     </div>
     <br>
     
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Yaşı</label><br>
+        <label class="control-label">Age</label><br>
         <div class="form-group label-floating is-empty " id="price">{{form.age}}</div>
         <span class="material-input"></span>
     </div>
     <br>
     
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvanın Sahibi</label><br>
+        <label class="control-label">Owner</label><br>
         <div class="form-group label-floating is-empty">{{form.owner}}</div>
         <span class="material-input"></span>
     </div>
     <br>
     
     <div class="form-group label-floating is-empty">
-        <label class="control-label">Hayvan Hakkında </label>
+        <label class="control-label">About the animal </label>
         <div class="form-group label-floating is-empty">{{form.description}}</div>
         <span class="material-input"></span>
     </div>
     <br> 
     <div class="form-group">
-        <button type="submit" class="btn btn-info">HAYVAN DÜZENLE</button>
+        <button type="submit" class="btn btn-info">EDIT</button>
     </div>
     </form>
 

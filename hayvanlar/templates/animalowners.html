@@ -69,34 +69,34 @@ background-color: white;
     <thead class="table_head">
         <tr>
           <th scope="col">id</th>
-          <th scope="col">İsim</th>
-          <th scope="col">Soyisim</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
           <th scope="col">E-mail</th>
-          <th scope="col">Telefon</th>
-          <th scope="col">Adres</th>
-          <th scope="col">Düzenle</th>
-          <th scope="col">Sil</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Adress</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
-      {% for sahip in sahipler %}
+      {% for owner in owners %}
       <tr>
-        <th scope="row">{{sahip.id}}</th>
+        <th scope="row">{{owner.id}}</th>
         <td>
-          <a href="{%url 'hayvanlar:sahipDetay' sahip.id %}">{{sahip.name}}</a>
+          <a href="{%url 'hayvanlar:owner_detail' owner.id %}">{{owner.name}}</a>
         </td>
-        <td>{{sahip.surname}}</td>
-        <td>{{sahip.email}}</td>
-        <td>{{sahip.phone}}</td>
-        <td>{{sahip.address}}</td>
+        <td>{{owner.surname}}</td>
+        <td>{{owner.email}}</td>
+        <td>{{owner.phone}}</td>
+        <td>{{owner.address}}</td>
         <td>
-          <a href="{%url 'hayvanlar:sahip-update' sahip.id %}">
-            <button class="btn btn-warning">Düzenle</button></a
+          <a href="{%url 'hayvanlar:owner-update' owner.id %}">
+            <button class="btn btn-warning">Edit</button></a
           >
         </td>
         <td>
-          <a href="{%url 'hayvanlar:sahipler_delete' sahip.id %}">
-            <button class="btn btn-danger">Sil</button></a
+          <a href="{%url 'hayvanlar:owner_delete' owner.id %}">
+            <button class="btn btn-danger">Delete</button></a
           >
         </td>
       </tr>
@@ -107,24 +107,24 @@ background-color: white;
 
   <form
     class="sahip-form"
-    action="{%url 'hayvanlar:hayvanSahipleri' %}"
+    action="{%url 'hayvanlar:animalowners' %}"
     method="post"
     id="form-control"
-  >
+    >
     {% csrf_token %}
     <div>
-      <h3><strong>Hayvan Sahibi Ekle</strong></h3>
+      <h3><strong>Add Animal Owner</strong></h3>
     </div>
-
+    
     <div class="form-group label-floating is-empty">
-      <label class="control-label">İsim</label><br />
+      <label class="control-label">Name</label><br />
       <div class="form-group label-floating is-empty">{{form2.name}}</div>
       <span class="material-input"></span>
     </div>
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Soyisim</label><br />
+      <label class="control-label">Surname</label><br />
       <div class="form-group label-floating is-empty">{{form2.surname}}</div>
       <span class="material-input"></span>
     </div>
@@ -138,7 +138,7 @@ background-color: white;
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Telefon</label><br />
+      <label class="control-label">Phone Number</label><br />
       <input
         type="text"
         name="phone"
@@ -154,13 +154,13 @@ background-color: white;
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Sahibin Adresi </label>
+      <label class="control-label">Owners Adress </label>
       <div class="form-group label-floating is-empty">{{form2.address}}</div>
       <span class="material-input"></span>
     </div>
     <br />
     <div class="form-group">
-      <button type="submit" class="btn btn-info">HAYVAN SAHİBİ EKLE</button>
+      <button type="submit" class="btn btn-info">ADD</button>
     </div>
   </form>
 </div>
@@ -170,19 +170,20 @@ background-color: white;
 <script>
 let previous = document.getElementById('example_previous')
 let next = document.getElementById('example_next')
+
 let table = new DataTable('#example', {
     // options
-    "language": {
-            "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
-            "zeroRecords": "Herhangi bir kayıt bulunamadı",
-            "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
-            "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"Ara",
-        }
+  //  "language": {
+  //          "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
+  //          "zeroRecords": "Herhangi bir kayıt bulunamadı",
+  //          "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
+  //          "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
+  //          "infoFiltered": "(filtered from _MAX_ total records)",
+  //          "search":"Ara",
+   //     }
       
 
-});
+}); 
 
 </script>
 

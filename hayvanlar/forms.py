@@ -1,17 +1,17 @@
 
-from .models import  HayvanSahibi,Hayvan
+from .models import  Animals,AnimalOwners
 from django.forms import ModelForm
+from django import forms
 
 
 
 
-
-class SahipForm(ModelForm):
+class OwnersForm(ModelForm):
    class Meta:
-        model = HayvanSahibi
+        model = AnimalOwners
         fields = ['name', 'surname', 'email', 'phone','address']
 
-class HayvanForm(ModelForm):
+class AnimalsForm(ModelForm):
    class Meta:
-        model = Hayvan
+        model = Animals
         fields = ['type', 'genus', 'name', 'age', 'owner', 'description']

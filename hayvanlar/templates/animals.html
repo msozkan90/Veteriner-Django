@@ -59,13 +59,13 @@
     <thead class="table_head">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Tür</th>
-          <th scope="col">Cins</th>
-          <th scope="col">İsim</th>
-          <th scope="col">Yaş</th>
-          <th scope="col">Sahibi</th>
-          <th scope="col">Düzenle</th>
-          <th scope="col">Sil</th>
+          <th scope="col">Type</th>
+          <th scope="col">Genus</th>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Owner</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -74,17 +74,17 @@
         <th scope="row">{{hayvan.id}}</th>
         <td>{{hayvan.type}}</td>
         <td>{{hayvan.genus}}</td>
-        <td><a href="{%url 'hayvanlar:hayvanDetay' hayvan.id %}">{{hayvan.name}}</a></td>  
+        <td><a href="{%url 'hayvanlar:animal_detail' hayvan.id %}">{{hayvan.name}}</a></td>  
         <td>{{hayvan.age}}</td>
         <td>{{hayvan.owner}}</td>
         <td>
-          <a href="{% url 'hayvanlar:hayvan-update' hayvan.id%}">
-            <button class="btn btn-warning">Düzenle</button></a
+          <a href="{% url 'hayvanlar:animal-update' hayvan.id%}">
+            <button class="btn btn-warning">Edit</button></a
           >
         </td>
         <td>
-          <a href="{% url 'hayvanlar:hayvan_delete' hayvan.id%}">
-            <button class="btn btn-danger">Sil</button></a
+          <a href="{% url 'hayvanlar:animal_delete' hayvan.id%}">
+            <button class="btn btn-danger">Delete</button></a
           >
         </td>
       </tr>
@@ -103,29 +103,32 @@
   >
     {% csrf_token %}
     <div>
-      <h3><strong>Hayvan Ekle</strong></h3>
+      <h3><strong>Add Animal</strong></h3>
     </div>
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label"> Hayvanın Türü</label><br />
+      <label class="control-label"> Type of animal</label><br />
+
       <div class="form-group label-floating is-empty">{{form.type}}</div>
     </div>
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Hayvanın Cinsi</label><br />
+      <label class="control-label">Genus of animal</label><br />
+
       <div class="form-group label-floating is-empty">{{form.genus}}</div>
     </div>
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Hayvanın İsmi</label><br />
+      <label class="control-label">Name</label><br />
       <div class="form-group label-floating is-empty">{{form.name}}</div>
     </div>
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Hayvanın Yaşı</label><br />
+      <label class="control-label"> Age</label><br />
+
       <div class="form-group label-floating is-empty" id="price">
         {{form.age}}
       </div>
@@ -133,18 +136,18 @@
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Hayvanın Sahibi</label><br />
+      <label class="control-label">Owner </label><br />
       <div class="form-group label-floating is-empty">{{form.owner}}</div>
     </div>
     <br />
 
     <div class="form-group label-floating is-empty">
-      <label class="control-label">Hayvan Hakkında </label>
+      <label class="control-label">About the animal </label>
       <div class="form-group label-floating is-empty">{{form.description}}</div>
     </div>
     <br />
     <div class="form-group">
-      <button type="submit" class="btn btn-info">HAYVAN EKLE</button>
+      <button type="submit" class="btn btn-info">ADD</button>
     </div>
   </form>
 </div>
@@ -157,15 +160,15 @@ let previous = document.getElementById('example_previous')
 let next = document.getElementById('example_next')
 let table = new DataTable('#example', {
     // options
-    "language": {
-            "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
-            "zeroRecords": "Herhangi bir kayıt bulunamadı",
-            "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
-            "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-            "search":"Ara",
+ //  "language": {
+  //          "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
+  //          "zeroRecords": "Herhangi bir kayıt bulunamadı",
+  //          "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
+  //          "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
+  //          "infoFiltered": "(filtered from _MAX_ total records)",
+  //          "search":"Ara",
           
-        }
+  //      } 
       
 
 });
