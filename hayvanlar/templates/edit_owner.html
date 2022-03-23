@@ -1,74 +1,65 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block style %}
 <style>
-    .form-group input {
-        width: 100%!important;
-    }
-    .form-group textarea{
-        width: 100%!important;
-    }
-    .form-group select{
-        width: 100%!important;
-    }
-    .sahip-form{
-        border: 2px black solid;
-        padding: 15px;
-        border-radius: 9px;
-        background-color: bisque;
-    }
-    .control-label{
-        font-weight: bold;
-    }
-    .sahip-form {
-        border: none;
-        padding: 15px;
-        border-radius: 9px;
-        background-color: #a9aabc;
-      }
-      tbody {
-        background-color: #a9aabc;
-      }
-      table a {
-        font-weight: bold;
-        color: rgb(119, 117, 6);
-      }
+  body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(rgba(27, 24, 24, 0.4), rgba(131, 119, 119, 0.4)), url('{% static "images/vf-issuelanding-vet-checking-heartbeat-of-brown-and-white-cat.jpg" %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: calc(100vh);
+    overflow-x: hidden;
+
+  }
+
 </style>
 {% endblock  %}
 {% block body %}
 <div class="container mt-5">
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Surname</th>
-      <th scope="col">E-mail</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Adress</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-
-    </tr>
-  </thead>
-  <tbody>
-      {% for sahip  in sahipler %}
-    <tr>
-      <th scope="row">{{sahip.id}}</th>
-      <td>
-        <a href="{%url 'hayvanlar:owner_detail' sahip.id %}">{{sahip.name}}</a>
-      </td>
-      <td>{{sahip.surname}}</td>
-      <td>{{sahip.email}}</td>
-      <td>{{sahip.phone}}</td>
-      <td>{{sahip.address}}</td>
-      <td><a href="{%url 'hayvanlar:owner-update' sahip.id %}"> <button class="btn btn-warning">Edit</button></a></td>
-      <td><a href="{%url 'hayvanlar:owner_delete' sahip.id %}"> <button class="btn btn-danger">Delete</button></a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
+  <table id="example" class="display" style="width:100%">
+    <thead class="table_head">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Adress</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for owner in owners %}
+      <tr>
+        <th scope="row">{{owner.id}}</th>
+        <td>
+          <a class="nav-link" href="{%url 'hayvanlar:owner_detail' owner.id %}">{{owner.name}}</a>
+        </td>
+        <td>{{owner.surname}}</td>
+        <td>{{owner.email}}</td>
+        <td>{{owner.phone}}</td>
+        <td>{{owner.address}}</td>
+        <td>
+          <a href="{%url 'hayvanlar:owner-update' owner.id %}">
+            <button class="btn btn-warning">Edit</button></a
+          >
+        </td>
+        <td>
+          <a href="{%url 'hayvanlar:owner_delete' owner.id %}">
+            <button class="btn btn-danger">Delete</button></a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
 </table>
-<hr>
-
+  <hr />
 
 <form class="sahip-form" action="" method="post" id="form-control"> 
 {% csrf_token %}

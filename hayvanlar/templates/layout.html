@@ -13,56 +13,18 @@
     />
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <title>MyVet</title>
     <style>
-      body {
-        background: #444655;
-        
-      }
-      .navbar {
-        background: #212529;
-      }
-      a {
-        color: whitesmoke;
-        text-decoration: none;
-      }
-      a:hover{
-        color: rgb(194, 194, 194);
-        transition: 0.5;
-      }
-      .nav-item.active{
-        color: red !important;;
-      }
+
+
     </style>
     {% block style %} {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="/">HomePage</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'hayvanlar:animals'%}"
-              >Animals</a
-            >
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'hayvanlar:animalowners'%}"
-              >Animal Owners <span class="sr-only">(current)</span></a
-            >
-          </li>
-        </ul>
 
-        {% if user.is_authenticated %}
-        <a href="{% url 'user:sign_out' %}" class="pl-5">Logout</a>
-        {% else %}
-        <a href="{% url 'user:register' %}" class="pl-5">Register</a>
-        <a href="{% url 'user:sign_in' %}" class="pl-5">Login</a>
-        {% endif %}
-      </div>
-    </nav>
- 
+    {% include "includes/navbar.html" %} 
     <div class="container"> <div class="mt-3 ">{% include "includes/messages.html" %} </div> </div>
     {% block body %} {% endblock %}
 
@@ -84,7 +46,25 @@
     ></script>
 
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+  <script>
+    let previous = document.getElementById('example_previous')
+    let next = document.getElementById('example_next')
+    let table = new DataTable('#example', {
+        // options
+     //  "language": {
+      //          "lengthMenu": "Sayfa başına gösterilen kayıt _MENU_ ",
+      //          "zeroRecords": "Herhangi bir kayıt bulunamadı",
+      //          "info": "Gösterilen sayfa _PAGE_ / _PAGES_",
+      //          "infoEmpty": "Henüz herhangi bir kayıt yapılmadı",
+      //          "infoFiltered": "(filtered from _MAX_ total records)",
+      //          "search":"Ara",
+              
+      //      } 
+          
     
+    });
+    
+    </script>
 
     {% block script %} {% endblock %}
   </body>

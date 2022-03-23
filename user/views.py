@@ -33,7 +33,7 @@ def register(request):
 				messages.warning(request,"This user name is already taken")
 			if(email_check):
 					messages.warning(request,"This email is already taken")
-			# messages.warning(request,"Please fill the form correctly")
+
 			return redirect("user:register")
 	return render(request,"register.html",{"form":form})
 

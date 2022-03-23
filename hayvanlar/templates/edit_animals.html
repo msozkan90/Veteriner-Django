@@ -1,112 +1,66 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block style %}
 <style>
-    .form-group input {
-        width: 100%!important;
-    }
-    .form-group textarea{
-        width: 100%!important;
-    }
-    .form-group select{
-        width: 100%!important;
-    }
-    .hayvan-form{
-        border: 2px black solid;
-        padding: 15px;
-        border-radius: 9px;
-        background-color: bisque;
-    }
-    .control-label{
-        font-weight: bold;
-    }
-    .hayvan-form {
-        border: none;
-        padding: 15px;
-        border-radius: 9px;
-        background-color: #a9aabc;
-      }
+  body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(rgba(27, 24, 24, 0.5), rgba(131, 119, 119, 0.5)), url('{% static "images/groupDog.jpg" %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: calc(100vh );
+    overflow-x: hidden;
 
-      tbody {
-        background-color: #a9aabc;
-      }
-      table a {
-        font-weight: bold;
-        color: rgb(119, 117, 6);
-      }
+  }
+
 </style>
 {% endblock  %}
 {% block body %}
-<div class="container">
-<table class="table  mt-5">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Type</th>
-      <th scope="col">Genus</th>
-      <th scope="col">Name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Owner</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-
-    </tr>
-  </thead>
-  <tbody>
-      {% for hayvan  in hayvanlar %}
-    <tr>
-      <th scope="row">{{hayvan.id}}</th>
-      <td>{{hayvan.type}}</td>
-      <td>{{hayvan.genus}}</td>
-      <td><a href="{%url 'hayvanlar:animal_detail' hayvan.id %}">{{hayvan.name}}</a></td> 
-      <td>{{hayvan.age}}</td>
-      <td>{{hayvan.owner}}</td>
-      <td><a href="{% url 'hayvanlar:animal-update' hayvan.id%}"> <button class="btn btn-warning">Edit</button></a></td>
-      <td><a href="{% url 'hayvanlar:animal_delete' hayvan.id%}"> <button class="btn btn-danger">Delete</button></a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<hr>
-{% comment %} <div>
-    <br>
-    <h3> HAYVAN EKLE </h3>
-    <form action=""  method="POST" class="">
+<div class="container mt-5">
+    <table id="example" class="display" style="width:100%">
+        <thead class="table_head">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Type</th>
+              <th scope="col">Genus</th>
+              <th scope="col">Name</th>
+              <th scope="col">Age</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for hayvan in hayvanlar %}
+          <tr>
+            <th scope="row">{{hayvan.id}}</th>
+            <td>{{hayvan.type}}</td>
+            <td>{{hayvan.genus}}</td>
+            <td><a class="nav-link" href="{%url 'hayvanlar:animal_detail' hayvan.id %}">{{hayvan.name}}</a></td>  
+            <td>{{hayvan.age}}</td>
+            <td>{{hayvan.owner}}</td>
+            <td>
+              <a href="{% url 'hayvanlar:animal-update' hayvan.id%}">
+                <button class="btn btn-warning">Edit</button></a
+              >
+            </td>
+            <td>
+              <a href="{% url 'hayvanlar:animal_delete' hayvan.id%}">
+                <button class="btn btn-danger">Delete</button></a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
     
-        <div class="form-group label-floating is-empty">
-            <label class="control-label">Hayvanın Türü</label>
-            <input type="text" name="type" value="" class="form-control">
-            <span class="material-input"></span>
-        </div>
-        <div class="form-group label-floating is-empty">
-            <label class="control-label">Hayvanın Cinsi</label>
-            <input type="text" name="genus" value="" class="form-control">
-            <span class="material-input"></span>
-        </div>
-        <div class="form-group label-floating is-empty">
-            <label class="control-label">Hayvanın İsmi</label>
-            <input type="text" name="name" value="" class="form-control">
-            <span class="material-input"></span>
-        </div>
-        <div class="form-group label-floating is-empty">
-            <label class="control-label">Hayvanın Yaşı</label>
-            <input type="number" name="age" value="" class="form-control">
-            <span class="material-input"></span>
-        </div>
-        <div class="form-group label-floating is-empty">
-            <label class="control-label">Hayvan Hakkında</label>
-            <textarea name="description" id="" cols="30" rows="10"
-                      class="form-control"></textarea>
-            <span class="material-input"></span>
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-info">HAYVAN EKLE</button>
-        </div>
-
-    </form>
-</div> {% endcomment %}
-<br>
-
+      <hr />
+    
+      <br />
 <form class="hayvan-form" action="" method="post" id="form-control">
 
     {% csrf_token %}

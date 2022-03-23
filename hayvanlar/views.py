@@ -73,8 +73,6 @@ def owners(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     form2=OwnersForm()
-
-    # query=request.GET.get('search')
     if request.method == 'POST':
         form = OwnersForm(request.POST)
         try:
@@ -85,23 +83,13 @@ def owners(request):
         except(ValueError):
             messages.warning(request,"Please fill the form correctly")
             return redirect("hayvanlar:index")
-
-    # if query:
-    #     sahipler=HayvanSahibi.objects.filter(Q(name__icontains=query) | Q(surname__icontains=query))
-    #     if sahipler:
-    #         context={"sahipler":sahipler,"form2":form2,"page_obj":page_obj}
-    #         return render(request,"hayvanSahipleri.html",context)
-    #     else:
-    #         messages.warning(request,"Aradığınız Kriterlerde Kayıt Bulunamadı.")
-    #         context={"sahipler":sahipler,"form2":form2,"page_obj":page_obj}
-    #         return render(request,"hayvanSahipleri.html",context)
     context={"owners":owners,"form2":form2,"page_obj":page_obj}
     return render(request,"animalowners.html",context)
 
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
 def owner_update(request,id):
      
-    sahipler=AnimalOwners.objects.all()
+    owners=AnimalOwners.objects.all()
     instance = get_object_or_404(AnimalOwners,id = id)
     form = OwnersForm(request.POST or None,instance = instance)
     try:
@@ -112,7 +100,7 @@ def owner_update(request,id):
     except(ValueError):
                 messages.warning(request,"Please fill the form correctly") 
                 return render(request,"edit_owner.html",context)
-    context={"sahipler":sahipler,"form":form}
+    context={"owners":owners,"form":form}
     return render(request,"edit_owner.html",context)
 
 

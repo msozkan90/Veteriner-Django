@@ -1,68 +1,86 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block style %}
 <style>
-.container{
-   background: #a9aabc;
-   border-radius: 10px;
-}
+  body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(rgba(27, 24, 24, 0.5), rgba(131, 119, 119, 0.5)), url('{% static "images/two-vets-with-dog.jpg" %}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: calc(100vh );
+    overflow-x: hidden;
+
+  }
 </style>
 {% endblock  %}
 {% block body %}
-<div class="container mt-5 py-3">
 
-    <div> <h4><strong>Animal Owner </strong> </h4></div> 
+  
+<div class="container mt-5  sahip-form">
+    <div  class="pt-0 mt-0"><h4><strong>Animal Owner </strong> </h4></div> 
+
     <hr>
     <div class="form-group label-floating is-empty">
-        <h5><strong>  <label  class="control-label">  Name</label></strong> </h5><hr>
-        <div class="form-group label-floating is-empty">{{form.name}}</div> 
+        <h5><strong>  <label  class="control-label">  Name</label></strong> </h5>
+        <div class="form-group label-floating is-empty detail">{{form.name}}</div> 
         
     </div>
-    <br>
+    <hr>
     
     <div class="form-group label-floating is-empty">
-        <h5><strong>  <label class="control-label"> Surname</label></strong> </h5><hr>
-        <div class="form-group label-floating is-empty">{{form.surname}}</div>
+        <h5><strong>  <label class="control-label"> Surname</label></strong> </h5>
+        <div class="form-group label-floating is-empty detail">{{form.surname}}</div>
         
     </div>
-    <br>
+    <hr>
     
     <div class="form-group label-floating is-empty">
-        <h5><strong>   <label class="control-label"> Email</label></strong> </h5><hr>
-        <div class="form-group label-floating is-empty">{{form.email}}</div> 
+        <h5><strong>   <label class="control-label"> Email</label></strong> </h5>
+        <div class="form-group label-floating is-empty detail">{{form.email}}</div> 
         
     </div>
-    <br>
+    <hr>
     
     <div class="form-group label-floating is-empty">
-        <h5><strong>   <label class="control-label"> Phone Number</label></strong> </h5><hr>
-        <div class="form-group label-floating is-empty " id="price">{{form.phone}}</div>
+        <h5><strong>   <label class="control-label"> Phone Number</label></strong> </h5>
+        <div class="form-group label-floating is-empty detail " id="price">{{form.phone}}</div>
         
     </div>
-    <br>
+    <hr>
     
     <div class="form-group label-floating is-empty">
-        <h5><strong>   <label class="control-label"> Adress</label> </strong> </h5>  <hr>
+        <h5><strong>   <label class="control-label"> Adress</label> </strong> </h5>  
 
-        <div class="form-group label-floating is-empty">{{form.address}}</div>
+        <div class="form-group label-floating is-empty detail">{{form.address}}</div>
        
     </div>
-    <br>
+    <hr>
     <div class="form-group label-floating is-empty">
-        <h5><strong>   <label class="control-label">Animals</label> </strong> </h5>  <hr>
+        <h5><strong>   <label class="control-label ">Animals</label> </strong> </h5>  
+        {% if hayvan %} 
         {% for animal  in hayvan %}
-        <div class="form-group label-floating is-empty">{{animal}}</div> 
-        {% endfor %}
+    <div class="form-group label-floating is-empty detail"> {{animal}}     </div>
+    {% endfor %}
+         {% else %} 
+         <div class="form-group label-floating is-empty detail">-</div> 
+          {% endif %}
+
     </div>
     <br>
 
-   
-
-
-
+ 
 
 
 
  
+  
+    
+
     
 
 
@@ -72,3 +90,5 @@
 
 
 {% endblock  %}
+
+
