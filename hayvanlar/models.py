@@ -24,7 +24,7 @@ class Animals(models.Model):
     genus = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     age=models.IntegerField(default=0)
-    owner=models.ForeignKey(AnimalOwners, on_delete=models.SET_NULL, null=True, blank=True)
+    owner=models.ForeignKey(AnimalOwners, on_delete=models.SET_NULL, null=True, blank=True,related_name="owner_animal")
     description = models.TextField(max_length=1000)
     def __str__(self):
         return self.name
