@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('hayvanlar', '0009_alter_hayvan_age'),
     ]
