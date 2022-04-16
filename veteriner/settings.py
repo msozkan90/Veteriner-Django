@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hayvanlar', 
-    'user',
+    'hayvanlar.apps.HayvanlarConfig', 
+    'user.apps.UserConfig',
+    'rest_framework',
 
 ]
 

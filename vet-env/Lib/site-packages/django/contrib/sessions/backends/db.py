@@ -1,8 +1,6 @@
 import logging
 
-from django.contrib.sessions.backends.base import (
-    CreateError, SessionBase, UpdateError,
-)
+from django.contrib.sessions.backends.base import CreateError, SessionBase, UpdateError
 from django.core.exceptions import SuspiciousOperation
 from django.db import DatabaseError, IntegrityError, router, transaction
 from django.utils import timezone
@@ -13,6 +11,7 @@ class SessionStore(SessionBase):
     """
     Implement database session store.
     """
+
     def __init__(self, session_key=None):
         super().__init__(session_key)
 
@@ -21,25 +20,27 @@ class SessionStore(SessionBase):
         # Avoids a circular import and allows importing SessionStore when
         # django.contrib.sessions is not in INSTALLED_APPS.
         from django.contrib.sessions.models import Session
+
         return Session
 
     @cached_property
     def model(self):
         return self.get_model_class()
 
-    def load(self):
+    def _get_session_from_db(self):
         try:
-            s = self.model.objects.get(
-                session_key=self.session_key,
-                expire_date__gt=timezone.now()
+            return self.model.objects.get(
+                session_key=self.session_key, expire_date__gt=timezone.now()
             )
-            return self.decode(s.session_data)
         except (self.model.DoesNotExist, SuspiciousOperation) as e:
             if isinstance(e, SuspiciousOperation):
-                logger = logging.getLogger('django.security.%s' % e.__class__.__name__)
+                logger = logging.getLogger("django.security.%s" % e.__class__.__name__)
                 logger.warning(str(e))
             self._session_key = None
-            return {}
+
+    def load(self):
+        s = self._get_session_from_db()
+        return self.decode(s.session_data) if s else {}
 
     def exists(self, session_key):
         return self.model.objects.filter(session_key=session_key).exists()
@@ -82,7 +83,9 @@ class SessionStore(SessionBase):
         using = router.db_for_write(self.model, instance=obj)
         try:
             with transaction.atomic(using=using):
-                obj.save(force_insert=must_create, force_update=not must_create, using=using)
+                obj.save(
+                    force_insert=must_create, force_update=not must_create, using=using
+                )
         except IntegrityError:
             if must_create:
                 raise CreateError

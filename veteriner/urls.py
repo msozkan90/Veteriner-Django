@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('hayvanlar.urls')),
     path('user/', include('user.urls')),
-
+    path('api/', include('hayvanlar.api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
