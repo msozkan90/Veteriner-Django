@@ -21,8 +21,10 @@ def index(request):
 
 @login_required(login_url = "user:sign_in")
 def animals(request):
-    # query=request.GET.get('search')
+    current_user = request.user
     hayvanlar=Animals.objects.all()
+    # From here used Data Tables for Search
+    # query=request.GET.get('search')
     # paginator = Paginator(hayvanlar, 10)
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
@@ -30,14 +32,16 @@ def animals(request):
     if request.method == 'POST':
         form = AnimalsForm(request.POST)
         try:
+            print(form.errors)
             if form.is_valid:
                 form.save()
                 messages.success(request,"You added animal successfully")
                 return redirect("hayvanlar:animals")
         except(ValueError):
                 messages.warning(request,"Please fill the form correctly")
-                return redirect("hayvanlar:index")
-    # From here used Data Tables
+                return redirect("hayvanlar:animals")
+
+    # From here used Data Tables for Search
     # if query:
     #     hayvanlar=Hayvan.objects.filter(Q(type__icontains=query) | Q(genus__icontains=query) | Q(name__icontains=query) )
     #     if hayvanlar: 
@@ -47,7 +51,8 @@ def animals(request):
     #         messages.warning(request,"Aradığınız Kriterlerde Kayıt Bulunamadı.")
     #         context={"hayvanlar":hayvanlar,"form":form,"page_obj":page_obj}
     #         return render(request,"animals.html",context)
-    context={"hayvanlar":hayvanlar,"form":form}
+
+    context={"hayvanlar":hayvanlar,"form":form,"current_user":current_user}
     return render(request,"animals.html",context)
 
 
@@ -86,9 +91,6 @@ def animal_detail(request,id):
 def owners(request):
 
     owners=AnimalOwners.objects.all()
-    # paginator = Paginator(owners, 10)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     form=OwnersForm()
     if request.method == 'POST':
         form = OwnersForm(request.POST)
@@ -102,6 +104,7 @@ def owners(request):
             return redirect("hayvanlar:index")
     context={"owners":owners,"form":form}
     return render(request,"animalowners.html",context)
+
 
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
 def owner_update(request,id):
@@ -120,6 +123,7 @@ def owner_update(request,id):
     context={"owners":owners,"form":form}
     return render(request,"edit_owner.html",context)
 
+
 @user_passes_test(lambda u: u.is_superuser,login_url = "hayvanlar:alertmessage")
 def owner_delete(request,id):
     owner = get_object_or_404(AnimalOwners,id = id)
@@ -127,12 +131,14 @@ def owner_delete(request,id):
     messages.success(request,"Data deleted successfully")
     return redirect("hayvanlar:animalowners")
 
+
 @login_required(login_url = "user:sign_in")
 def owner_detail(request,id):
     form = get_object_or_404(AnimalOwners,id = id)
     hayvan = form.animals_set.all()
     context={"form":form,"hayvan":hayvan}
     return render(request,"owner_detail.html",context)
+    
 
 @login_required(login_url = "user:sign_in")
 def alertmessage(request):

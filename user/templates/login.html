@@ -1,40 +1,67 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} 
+{% load static %}
 {% block style %}
 <style>
-
+    body {
+        padding: 0px;
+        margin: 0px;
+        width: 100%;
+       
+        background-image: url('{% static "images/two-vets-with-dog.jpg" %}');
+       
+        background-repeat: no-repeat;
+        background-size:cover;
+       
+       
+      }
+      .login-card {
+        background: rgba(14, 14, 14, 0.45);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(17px);
+        border-radius: 10px;
+        border: none;
+      }
+      .text-color{
+        color: rgb(184, 184, 184);
+      }
 </style>
-{% endblock  %}
-{% block body %}
+{% endblock %} {% block body %}
 <div class="container mt-5">
-
-    <form class="hayvan-form" action="" method="post" id="form-control">
-
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 login-card p-3">
+      <form  action="" method="post" >
         {% csrf_token %}
 
-        <div> <h3><strong>LOGIN</strong> </h3></div> 
-        <div class="form-group label-floating is-empty">
-            <label  class="control-label">Username</label><br>
-            <div class="form-group label-floating is-empty">{{form.username}}</div> 
-            <span class="material-input"></span>
+        <div>
+          <h3><strong>LOGIN</strong></h3>
         </div>
-        <br>
-        
         <div class="form-group label-floating is-empty">
-            <label class="control-label">Password </label>
-            <div class="form-group label-floating is-empty">{{form.password}}</div>
-            <span class="material-input"></span>
+          <label class="control-label">Username</label><br />
+          <div class="form-group label-floating is-empty">
+            <input type="text" name="username" class="form-control" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+         
+          </div>
+          <span class="material-input"></span>
         </div>
-        <br> 
+        <br />
+
+        <div class="form-group label-floating is-empty">
+          <label class="control-label">Password </label>
+          <div class="form-group label-floating is-empty">
+            <input type="password" name="password" class="form-control" autocomplete="current-password" required="" id="id_password">
+      
+          </div>
+          <span class="material-input"></span>
+        </div>
+        <br />
         <div class="form-group">
-            <button type="submit" class="btn btn-info">LOGIN</button>
+          <button type="submit" class="btn btn-danger btn-block">Login</button>
         </div>
-        </form>
-    
-
-
-
+      </form>
+    </div>
+  </div>
 </div>
 
-
-
-{% endblock  %}
+{% endblock %}

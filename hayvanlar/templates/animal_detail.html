@@ -16,11 +16,18 @@
         overflow-x: hidden;
     
       }
+
+      .control-label{
+    color:rgb(151, 22, 22);
+    font-weight: 620;
+  }
+
 </style>
 {% endblock  %}
 {% block body %}
-<div class="container my-5 py-3 hayvan-form">
-    <div> <h4><strong>Animal </strong> </h4></div> 
+<div class="container my-5 py-3 hayvan-form-detail">
+    <div class="container">
+    <div class="text-center"> <h4><strong>Animal Detail</strong> </h4></div> 
     <hr>
     <div class="form-group label-floating is-empty">
         <h5><strong>  <label  class="control-label"> Type of Animal</label></strong> </h5>
@@ -60,15 +67,15 @@
     
     <div class="form-group label-floating is-empty">
         <h5><strong>   <label class="control-label">About the animal </label></strong> </h5>
-        <hr>
+      
         <div class="form-group label-floating is-empty detail">{{form.description}}</div>
-     
+      
     </div>
     <br> 
 
 
 
-
+</div>
 </div>
 
 

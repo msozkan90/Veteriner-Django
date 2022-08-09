@@ -1,6 +1,8 @@
 # MyVet
 
 MyVet is a website for veterinarians to keep information about animals and animal owners.
+Function bases views and Class Based views used in this project
+
 
 ## Techs
 
@@ -8,6 +10,7 @@ MyVet is a website for veterinarians to keep information about animals and anima
 - Django
 - CSS - Bootstrap
 - HTML
+- DRF- Api
 
 ## Django installation
 
@@ -34,7 +37,7 @@ Activate the virtual environment for use this project easily.
 python manage.py makemigrations
 python manage.py migrate
 ```
-## Creatin Super User
+## Creating Super User
 ```
 python manage.py createsuperuser
 ```
@@ -53,6 +56,7 @@ python manage.py runserver
 # MyVet
 
 MyVet, veterinerlerin hayvan ve hayvan sahiplerinin bilgilerini tutmasına yarayan bir web sitesidir.
+Bu proje Function bases views ve Class Based views kullanılarak yapılmıştır.
 
 ## Kullanılan Teknolojiler
 

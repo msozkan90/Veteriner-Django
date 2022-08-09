@@ -16,7 +16,10 @@
     overflow-x: hidden;
 
   }
-
+  .text-center h3{
+    color:rgb(238, 235, 235);
+    font-weight: 620;
+  }
 </style>
 {% endblock %} {% block body %}
 <div class="container mt-5">
@@ -58,44 +61,56 @@
       {% endfor %}
     </tbody>
 </table>
-  <hr />
+ 
 
-  <form
+
+
+<div class="row ">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 mx-3">
+    <form
     class="sahip-form"
     action="{%url 'hayvanlar:animalowners' %}"
     method="post"
     id="form-control"
     >
     {% csrf_token %}
-    <div>
-      <h3><strong>Add Animal Owner</strong></h3>
+    <div class="text-center">
+      <h3 >Add Animal Owner</h3>
     </div>
     
     <div class="form-group label-floating is-empty">
       <label class="control-label">Name</label><br />
-      <div class="form-group label-floating is-empty">{{form.name}}</div>
+      <div class="form-group label-floating is-empty">
+        <input class="form-control" type="text" name="name" maxlength="20" required="" id="id_name">
+      </div>
       <span class="material-input"></span>
     </div>
-    <br />
+
 
     <div class="form-group label-floating is-empty">
       <label class="control-label">Surname</label><br />
-      <div class="form-group label-floating is-empty">{{form.surname}}</div>
+      <div class="form-group label-floating is-empty">
+        <input class="form-control" type="text" name="surname" maxlength="20" required="" id="id_surname">
+      </div>
       <span class="material-input"></span>
     </div>
-    <br />
+
 
     <div class="form-group label-floating is-empty">
       <label class="control-label">Email</label><br />
-      <div class="form-group label-floating is-empty">{{form.email}}</div>
+      <div class="form-group label-floating is-empty">
+        <input class="form-control" type="email" name="email" maxlength="30" required="" id="id_email">
+      </div>
       <span class="material-input"></span>
     </div>
-    <br />
+
 
     <div class="form-group label-floating is-empty">
       <label class="control-label">Phone Number</label><br />
       <input
         type="text"
+        class="form-control"
         name="phone"
         maxlength="11"
         required=""
@@ -104,20 +119,27 @@
         oninvalid="this.setCustomValidity('Lütfen geçerli formatta bir telefon numarası giriniz. Örneğin: 05334442222')"
         oninput="this.setCustomValidity('')"
       />
-      <span class="material-input"></span>
+
     </div>
-    <br />
+ 
 
     <div class="form-group label-floating is-empty">
       <label class="control-label">Owners Adress </label>
-      <div class="form-group label-floating is-empty">{{form.address}}</div>
+      <div class="form-group label-floating is-empty">
+        <textarea class="form-control" name="address" cols="20" rows="5" maxlength="40" required="" id="id_address"></textarea>
+      </div>
       <span class="material-input"></span>
     </div>
-    <br />
+  
     <div class="form-group">
-      <button type="submit" class="btn btn-info">ADD</button>
+      <button type="submit" class="btn btn-danger btn-block">ADD</button>
     </div>
   </form>
+
+  </div>
+</div>
+
+ 
 </div>
 
 {% endblock %}

@@ -1,55 +1,138 @@
-{% extends 'layout.html' %} {% block style %}
+{% extends 'layout.html' %} 
+{% load static %}
+{% block style %}
 <style>
+  body {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+   
+    background-image: url('{% static "images/two-vets-with-dog.jpg" %}');
+   
+    background-repeat: no-repeat;
+    background-size:cover;
+   
+   
+  }
+  .register-card {
+    background: rgba(14, 14, 14, 0.45);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: none;
+  }
+  .text-color{
+    color: rgb(0, 0, 0);
+    font-size: medium;
+    font-weight: 650;
+  }
+
 
 </style>
-{% endblock %} {% block body %}
+{% endblock %}
+ {% block body %}
 <div class="container mt-5">
-  <form class="hayvan-form" action="" method="post" id="form-control">
-    {% csrf_token %}
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 text-color p-3 register-card">
+      <form class="" action="" method="post" id="">
+        {% csrf_token %}
 
-    <div>
-      <h3><strong>REGISTER</strong></h3>
+        <div>
+          <h3><strong>REGISTER</strong></h3>
+        </div>
+        <div class="form-group label-floating is-empty">
+          <label class="control-label required" for="id_username"
+            >Username:</label
+          >
+
+          <input
+            type="text"
+            name="username"
+            class="vTextField form-control"
+            minlength="3"
+            maxlength="150"
+            autocapitalize="none"
+            autocomplete="username"
+            autofocus=""
+            required=""
+            id="id_username"
+          />
+
+          <div class="help mt-3">
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          </div>
+        </div>
+        <br />
+        <div class="form-group label-floating is-empty">
+          <label class="control-label"> Email</label><br />
+          <div class="form-group label-floating is-empty">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              required=""
+              id="id_email"
+            />
+          </div>
+          <span class="material-input"></span>
+        </div>
+        <br />
+        <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating is-empty">
+            <label class="control-label required" for="id_password1"
+              >Password:</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              name="password1"
+              autocomplete="new-password"
+              required=""
+              id="id_password1"
+              aria-autocomplete="list"
+            />
+            <div class="help mt-3">
+              <ul>
+                <li>
+                  Your password can't be too similar to your other personal
+                  information.
+                </li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can't be a commonly used password.</li>
+                <li>Your password can't be entirely numeric.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group label-floating is-empty">
+          <div class="form-group label-floating is-empty">
+            <label class="control-label required" for="id_password2"
+              >Password confirmation:</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              name="password2"
+              autocomplete="new-password"
+              required=""
+              id="id_password2"
+            />
+            <div class="help mt-3">
+              Enter the same password as before, for verification.
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger btn-block">Register</button>
+        </div>
+      </form>
     </div>
-
-    <div class="form-group label-floating is-empty" >
-                    
-                    
-      <label class="control-label required" for="id_username">Username:</label>
-      
-          <input type="text" name="username" class="vTextField" minlength="3" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
-      
-  
-  
-      <div class="help">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
-  
-</div>
-    <br />
-    <div class="form-group label-floating is-empty">
-      <label class="control-label"> Email</label><br />
-      <div class="form-group label-floating is-empty">{{form.email}}</div>
-      <span class="material-input"></span>
-    </div>
-    <br />
-    <div class="form-group label-floating is-empty">                        
-      <div class="form-group label-floating is-empty">                    
-              <label class="control-label required" for="id_password1">Password:</label>             
-                  <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" aria-autocomplete="list">                                  
-              <div class="help"><ul><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul></div>         
-      </div>
-</div>
-
-<div class="form-group label-floating is-empty">                        
-  <div class="form-group label-floating is-empty">          
-          <label class="control-label required" for="id_password2">Password confirmation:</label> 
-              <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
-          <div class="help">Enter the same password as before, for verification.</div>      
   </div>
-</div>
-    <br />
-    <div class="form-group">
-      <button type="submit" class="btn btn-info">REGISTER</button>
-    </div>
-  </form>
 </div>
 
 {% endblock %}

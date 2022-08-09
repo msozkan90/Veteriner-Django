@@ -17,10 +17,13 @@
 
   }
 
+
+
 </style>
 {% endblock  %}
 {% block body %}
 <div class="container mt-5">
+
     <table id="example" class="display" style="width:100%">
         <thead class="table_head">
             <tr>
@@ -58,58 +61,73 @@
         </tbody>
     </table>
     
-      <hr />
-    
-      <br />
-<form class="hayvan-form" action="" method="post" id="form-control">
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
 
-    {% csrf_token %}
-    <div> <h3><strong>Edit Animals</strong> </h3></div> 
-    <div class="form-group label-floating is-empty">
-        <label  class="control-label"> Type of animal</label><br>
-        <div class="form-group label-floating is-empty">{{form.type}}</div> 
-        <span class="material-input"></span>
-    </div>
-    <br>
-    
-    <div class="form-group label-floating is-empty">
-        <label class="control-label">Genus of animal</label><br>
-        <div class="form-group label-floating is-empty">{{form.genus}}</div>
-        <span class="material-input"></span>
-    </div>
-    <br>
-    
-    <div class="form-group label-floating is-empty">
-        <label class="control-label">Name</label><br>
-        <div class="form-group label-floating is-empty">{{form.name}}</div> 
-        <span class="material-input"></span>
-    </div>
-    <br>
-    
-    <div class="form-group label-floating is-empty">
-        <label class="control-label">Age</label><br>
-        <div class="form-group label-floating is-empty " id="price">{{form.age}}</div>
-        <span class="material-input"></span>
-    </div>
-    <br>
-    
-    <div class="form-group label-floating is-empty">
-        <label class="control-label">Owner</label><br>
-        <div class="form-group label-floating is-empty">{{form.owner}}</div>
-        <span class="material-input"></span>
-    </div>
-    <br>
-    
-    <div class="form-group label-floating is-empty">
-        <label class="control-label">About the animal </label>
-        <div class="form-group label-floating is-empty">{{form.description}}</div>
-        <span class="material-input"></span>
-    </div>
-    <br> 
-    <div class="form-group">
-        <button type="submit" class="btn btn-info">EDIT</button>
-    </div>
-    </form>
+    <form class="hayvan-form mt-5" action="" method="post" id="form-control">
+
+      {% csrf_token %}
+      <div class="text-center"> <h3>Edit Animals </h3></div> 
+      <div class="form-group label-floating is-empty">
+          <label  class="control-label"> Type of animal</label><br>
+          <div class="form-group label-floating is-empty">
+            <input type="text" name="type" class="form-control" value="{{form.type.value}}" maxlength="15" required="" id="id_type">
+          </div> 
+          <span class="material-input"></span>
+      </div>
+
+      
+      <div class="form-group label-floating is-empty">
+          <label class="control-label">Genus of animal</label><br>
+          <div class="form-group label-floating is-empty">
+            <input type="text" name="genus" value="{{form.genus.value}}"  class="form-control" maxlength="15" required="" id="id_genus">
+          </div>
+          <span class="material-input"></span>
+      </div>
+     
+      <div class="form-group label-floating is-empty">
+          <label class="control-label">Name</label><br>
+          <div class="form-group label-floating is-empty">
+            <input type="text" name="name" value="{{form.name.value}}" class="form-control" maxlength="20" required="" id="id_name">
+          </div> 
+          <span class="material-input"></span>
+      </div>
+     
+      <div class="form-group label-floating is-empty">
+          <label class="control-label">Age</label><br>
+          <div class="form-group label-floating is-empty " id="price">
+            <input type="number" name="age" value="{{form.age.value}}" class="form-control" required="" id="id_age">
+          </div>
+          <span class="material-input"></span>
+      </div>
+
+      
+      <div class="form-group label-floating is-empty">
+          <label class="control-label">Owner</label><br>
+          <div class="form-group label-floating is-empty">
+            {{form.owner}}
+          </div>
+          <span class="material-input"></span>
+      </div>
+ 
+      
+      <div class="form-group label-floating is-empty">
+          <label class="control-label">About the animal </label>
+          <div class="form-group label-floating is-empty">
+            <textarea name="description"  class="form-control" cols="40" rows="5" maxlength="100" required="" id="id_description">{{form.description.value}}</textarea>
+          </div>
+          <span class="material-input"></span>
+      </div>
+
+      <div class="form-group">
+          <button type="submit" class="btn btn-danger btn-block">EDIT</button>
+      </div>
+      </form>
+  
+
+  </div>
+</div>
 
 
 
@@ -132,3 +150,13 @@
 
 
 {% endblock  %}
+
+
+{% block script %} 
+
+  <script>
+   let owner= document.getElementById('id_owner')
+   owner.classList = "form-control"
+  </script>
+
+{% endblock %}

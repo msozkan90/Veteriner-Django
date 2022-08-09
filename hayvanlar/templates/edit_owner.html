@@ -16,7 +16,10 @@
     overflow-x: hidden;
 
   }
-
+  .text-center h3{
+    color:rgb(238, 235, 235);
+    font-weight: 620;
+  }
 </style>
 {% endblock  %}
 {% block body %}
@@ -59,49 +62,56 @@
       {% endfor %}
     </tbody>
 </table>
-  <hr />
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
 
-<form class="sahip-form" action="" method="post" id="form-control"> 
+<form class="sahip-form mt-5" action="" method="post" id="form-control"> 
 {% csrf_token %}
-<div> <h3><strong>Edit Animal Owners</strong> </h3></div> 
+<div class="text-center"> <h3>Edit Animal Owners </h3></div> 
 
 <div class="form-group label-floating is-empty">
     <label  class="control-label">Name</label><br>
-    <div class="form-group label-floating is-empty">{{form.name}}</div> 
+    <div class="form-group label-floating is-empty">
+      <input type="text" name="name" class="form-control" value="{{form.name.value}}" maxlength="20" required="" id="id_name">
+  </div> 
     <span class="material-input"></span>
 </div>
-<br>
 
 <div class="form-group label-floating is-empty">
     <label class="control-label">Surname</label><br>
-    <div class="form-group label-floating is-empty">{{form.surname}}</div>
+    <div class="form-group label-floating is-empty">
+      <input type="text" name="surname" class="form-control" value="{{form.surname.value}}" maxlength="20" required="" id="id_surname">
+    </div>
     <span class="material-input"></span>
 </div>
-<br>
 
 <div class="form-group label-floating is-empty">
     <label class="control-label">Email</label><br>
-    <div class="form-group label-floating is-empty">{{form.email}}</div> 
+    <div class="form-group label-floating is-empty">
+      <input type="email" name="email" class="form-control" value="{{form.email.value}}" maxlength="30" required="" id="id_email">
+    
+    </div> 
     <span class="material-input"></span>
 </div>
-<br>
 
 <div class="form-group label-floating is-empty">
     <label class="control-label">Phone Number</label><br>
-    <input type="text" name="phone" maxlength="11" required="" id="id_phone"  pattern="[0]{1}[5]{1}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}" {{form.phone}}
-    <span class="material-input"></span>
+    <input type="text" name="phone" class="form-control" maxlength="11" required="" id="id_phone"  pattern="[0]{1}[5]{1}[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}"
+    value="{{form.phone.value}}"
+>
 </div>
-<br>
-
 
 <div class="form-group label-floating is-empty">
     <label class="control-label">Owners Adress </label>
-    <div class="form-group label-floating is-empty">{{form.address}}</div>
+    <div class="form-group label-floating is-empty">
+      <textarea name="address" cols="40" rows="5" maxlength="40" class="form-control" required="" id="id_address"> {{form.address.value}}</textarea>
+     
+    </div>
     <span class="material-input"></span>
 </div>
-<br>
 <div class="form-group">
-    <button type="submit" class="btn btn-info">EDIT</button>
+    <button type="submit" class="btn btn-danger btn-block">EDIT</button>
 </div>
 </form>
 
@@ -109,7 +119,8 @@
 
 </div>
 
-
+</div>
+</div>
 
 
 {% endblock  %}

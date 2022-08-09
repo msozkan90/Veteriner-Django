@@ -20,6 +20,7 @@ urlpatterns = [
 
 
 
+# ------------CLASS BASED VİEWS-----------------------
     # path('', IndexPageView.as_view(), name="index"),
     # path('animals', AnimalCreateView.as_view(), name="animals"),
     # path('animalowners/', OwnerCreateView.as_view(), name="animalowners"),

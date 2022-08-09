@@ -5,6 +5,8 @@ from hayvanlar.models import AnimalOwners,Animals
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAdminUserOrReadOnly
 from .pagination import StandardResultsSetPagination
+
+
 class AnimalsListCreateAPIView(generics.ListCreateAPIView):
     queryset=Animals.objects.all()
     serializer_class=AnimalsSerializers

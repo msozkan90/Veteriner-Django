@@ -1,8 +1,25 @@
 {% if messages %}
-<ul class="messages" >
+<ul class="messages mt-2" >
     {% for message in messages %}
-    <div {% if message.tags %} class="alert-{{ message.tags }}" style="padding: 15px;border-radius:9px;"   id="messages" {% endif %}>{{ message }}</div>
+    <div {% if message.tags %} class="alert-{{ message.tags }}" style="padding: 15px;border-radius:9px;"   id="messages" {% endif %}>{{ message }}
+   
+    <a href="#" class="closebtn" onclick="this.parentElement.style.display='none';" data-bs-dismiss="modal" aria-label="Close"> X</a>
+</div>
     <br>
     {% endfor %}
 </ul>
 {% endif %}
+
+
+
+
+
+
+ 
+    {% comment %} <div {% if message.tags %} class="alert-{{ message.tags }}" style="padding: 15px;border-radius:9px;"   id="messages" {% endif %}>{{ message }}
+        <button type="button" class="btn-close closebtn"  onclick="this.parentElement.style.display='none';" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <br>
+
+</ul> {% endcomment %}

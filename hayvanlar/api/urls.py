@@ -1,6 +1,5 @@
 from django.urls import path
 
-# from Book.api.views import BookListCreateAPIView,AuthorListCreateAPIView,BookDetailAPIview
 from hayvanlar.api import views as api_views
 urlpatterns = [
     path('animals/',api_views.AnimalsListCreateAPIView.as_view(),name='animalslist'),

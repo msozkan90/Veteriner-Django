@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import redirect
 from django.contrib import messages
 
+# Modified Class Based Mixins
 
 class EditLoginRequiredMixin(AccessMixin):
     """Verify that the current user is authenticated and is an organisor."""

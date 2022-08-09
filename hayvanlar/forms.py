@@ -3,9 +3,6 @@ from .models import  Animals,AnimalOwners
 from django.forms import ModelForm
 
 
-
-
-
 class OwnersForm(ModelForm):
    class Meta:
         model = AnimalOwners

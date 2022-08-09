@@ -68,6 +68,12 @@ def sign_out(request):
 	return redirect("hayvanlar:index")
 
 
+
+
+
+# Generic
+
+
 # class UserCreateView(generic.CreateView):
 # 	template_name = "register.html"
 # 	form_class = CreateUserForm
